@@ -131,20 +131,8 @@ REST_FRAMEWORK = {
     ),
     'NON_FIELD_ERRORS_KEY': 'erro',
     'ORDERING_PARAM': 'sort',
-    # 'EXCEPTION_HANDLER': 'lins_restapi.http.exception_handler',
-    'NON_FIELD_ERRORS_KEY': 'general',
     'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
     'DATETIME_INPUT_FORMATS': ('%Y-%m-%d %H:%M:%S',),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    # ),
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    # ]
 }
 
 VALUE_LENT = os.environ.get('VALUE_LENT', '10.00')
