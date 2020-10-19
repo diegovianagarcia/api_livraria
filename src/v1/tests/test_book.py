@@ -17,6 +17,9 @@ class BookTestCase(APITestCase):
     URL = '/v1/book'
 
     def test_post_book(self):
+        '''
+        Inserir um livro
+        '''
         self.body = BookBuilder.new_book_body(title='Harry Potter')
         self.response = self.client.post(self.URL, self.body)
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
@@ -27,6 +30,9 @@ class BookTestCase(APITestCase):
         })
 
     def test_get_detail(self):
+        '''
+        Pesquisar um único livro
+        '''
         self.test_post_book()
         data = self.response.data
         self.response = self.client.get(f'{self.URL}/{str(data["id"])}')
@@ -34,6 +40,9 @@ class BookTestCase(APITestCase):
         self.assertDictEqual(self.response.data, data)
 
     def test_get_list(self):
+        '''
+        Listar todos os livros
+        '''
         self.test_post_book()
         book1 = self.body['title']
         self.body = BookBuilder.new_book_body(title='Percy Jackson')

@@ -17,6 +17,9 @@ class ClientTestCase(APITestCase):
     URL = '/v1/client'
 
     def test_post_client(self):
+        '''
+        Inserir um cliente
+        '''
         self.body = ClientBuilder.new_client_body(name='Harry Potter')
         self.response = self.client.post(self.URL, self.body)
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
@@ -25,14 +28,20 @@ class ClientTestCase(APITestCase):
             'name': self.body['name'],
         })
 
-    def test_get_by_detail(self):
+    def test_get_detail(self):
+        '''
+        Pesquisar um único cliente
+        '''
         self.test_post_client()
         data = self.response.data
         self.response = self.client.get(f'{self.URL}/{str(data["id"])}')
         self.assertEqual(self.response.status_code, status.HTTP_200_OK)
         self.assertDictEqual(self.response.data, data)
 
-    def test_get_by_list(self):
+    def test_get_list(self):
+        '''
+        Listar todos os clientes
+        '''
         self.test_post_client()
         client1 = self.body['name']
         self.body = ClientBuilder.new_client_body(name='Percy Jackson')

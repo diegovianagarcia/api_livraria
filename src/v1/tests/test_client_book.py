@@ -20,6 +20,9 @@ class ClientBookTestCase(APITestCase):
         Interest.objects.create(days=7, fine=7.0, interest=0.6)
 
     def test_get_book_zero_day(self):
+        '''
+        Calculo de multa e juros no dia do vencimento do emprestimo
+        '''
         self.model_reserve = Reserve.objects.create(
             client=self.model_client,
             book=self.model_book)
@@ -30,6 +33,9 @@ class ClientBookTestCase(APITestCase):
         self.assertEqual(results['interest'], 0)
 
     def test_get_book_one_day_late(self):
+        '''
+        Calculo de multa e juros com um dia de atraso
+        '''
         self.model_reserve = Reserve.objects.create(
             client=self.model_client,
             book=self.model_book)
@@ -42,6 +48,9 @@ class ClientBookTestCase(APITestCase):
         self.assertEqual(results['interest'], 0.02)
 
     def test_get_book_four_day_late(self):
+        '''
+        Calculo de multa e juros com quatro dias de atraso
+        '''
         self.model_reserve = Reserve.objects.create(
             client=self.model_client,
             book=self.model_book)

@@ -23,11 +23,17 @@ class ReserveTestCase(APITestCase):
         self.model_book = Book.objects.create(title='Harry Potter')
 
     def test_post_reserve(self):
+        '''
+        Reservar um livro com sucesso
+        '''
         self.body = ReserveBuilder.new_reserve_body(client=self.model_client.id)
         self.response = self.client.post(self.URL.format(self.model_book.id), self.body)
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
 
     def test_post_reserve_error(self):
+        '''
+        Reservar um livro com erro: O livro já está emprestado
+        '''
         self.test_post_reserve()
         self.response = self.client.post(self.URL.format(self.model_book.id), self.body)
         self.assertEqual(self.response.status_code, status.HTTP_400_BAD_REQUEST)
